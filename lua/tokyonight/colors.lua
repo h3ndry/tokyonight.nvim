@@ -13,7 +13,7 @@ function M.setup(config)
 
   colors = {
     none = "NONE",
-    bg_dark = "#1f2335",
+    bg_dark = "#0e0e0e",
     bg = "#24283b",
     bg_highlight = "#292e42",
     terminal_black = "#414868",
@@ -45,7 +45,7 @@ function M.setup(config)
     gitSigns = { add = "#164846", change = "#394b70", delete = "#823c41" },
   }
   if config.style == "night" or config.style == "day" or vim.o.background == "light" then
-    colors.bg = "#1a1b26"
+    colors.bg = "#080808"
   end
   util.bg = colors.bg
   util.day_brightness = config.dayBrightness
