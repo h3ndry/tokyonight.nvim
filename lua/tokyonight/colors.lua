@@ -32,6 +32,7 @@ function M.setup(config)
     blue6 = "#B4F9F8",
     blue7 = "#394b70",
     magenta = "#bb9af7",
+    magenta2 = "#ff007c",
     purple = "#9d7cd8",
     orange = "#ff9e64",
     yellow = "#e0af68",
@@ -73,7 +74,7 @@ function M.setup(config)
   colors.bg_statusline = colors.bg_dark
 
   -- Sidebar and Floats are configurable
-  colors.bg_sidebar = config.darkSidebar and colors.bg_dark or colors.bg
+  colors.bg_sidebar = (config.transparentSidebar and colors.none) or config.darkSidebar and colors.bg_dark or colors.bg
   colors.bg_float = config.darkFloat and colors.bg_dark or colors.bg
 
   colors.bg_visual = util.darken(colors.blue0, 0.7)

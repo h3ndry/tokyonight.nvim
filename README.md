@@ -42,6 +42,7 @@ A dark and light Neovim theme written in Lua ported from the Visual Studio Code 
 - [Neogit](https://github.com/TimUntersberger/neogit)
 - [vim-sneak](https://github.com/justinmk/vim-sneak)
 - [Fern](https://github.com/lambdalisue/fern.vim)
+- [Barbar](https://github.com/romgrk/barbar.nvim)
 
 ## ⚡️ Requirements
 
@@ -54,7 +55,7 @@ Install the theme with your preferred package manager:
 [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
-Plug 'folke/tokyonight.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 ```
 
 [packer](https://github.com/wbthomason/packer.nvim)
@@ -118,6 +119,7 @@ The **day** style will be used if:
 | tokyonight_transparent              | `false`   | Enable this to disable setting the background color                                                                                                             |
 | tokyonight_hide_inactive_statusline | `false`   | Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**. |
 | tokyonight_sidebars                 | `{}`      | Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`                                                      |
+| tokyonight_transparent_sidebar      | `false`   | Sidebar like windows like `NvimTree` get a transparent background                                                                                               |
 | tokyonight_dark_sidebar             | `true`    | Sidebar like windows like `NvimTree` get a darker background                                                                                                    |
 | tokyonight_dark_float               | `true`    | Float windows like the lsp diagnostics windows get a darker background.                                                                                         |
 | tokyonight_colors                   | `{}`      | You can override specific color groups to use other groups or a hex color                                                                                       |
@@ -163,6 +165,16 @@ set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{25
 Extra color configs for **Kitty**, **Alacritty**, **Fish**, **WezTerm** and **iTerm** can be found in [extras](extras/). To use them, refer to their respective documentation.
 
 ![image](https://user-images.githubusercontent.com/292349/115395546-d8d6f880-a198-11eb-98fb-a1194787701d.png)
+
+You can easily use the color palette for other plugins inside your Neovim config:
+
+```lua
+local colors = require("tokyonight.colors").setup({}) -- pass in any of the config options as explained above
+local utils = requires("tokyonight.util")
+
+aplugin.background = colors.bg_dark
+aplugin.my_error = util.brighten(colors.red1, 0.3)
+```
 
 ## 🔥 Contributing
 

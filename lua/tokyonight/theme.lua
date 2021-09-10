@@ -16,8 +16,8 @@ function M.setup(config)
 
   theme.base = {
     Comment = { fg = c.comment, style = config.commentStyle }, -- any comment
-    ColorColumn = { bg = c.bg_visual }, -- used for the columns set with 'colorcolumn'
-    Conceal = { fg = c.dark3 }, -- placeholder characters substituted for concealed text (see 'conceallevel')
+    ColorColumn = { bg = c.black }, -- used for the columns set with 'colorcolumn'
+    Conceal = { fg = c.dark5 }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor = { fg = c.bg, bg = c.fg }, -- character under the cursor
     lCursor = { fg = c.bg, bg = c.fg }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM = { fg = c.bg, bg = c.fg }, -- like Cursor, but used when in IME mode |CursorIM|
@@ -174,6 +174,7 @@ function M.setup(config)
     LspDiagnosticsUnderlineHint = { style = "undercurl", sp = c.hint }, -- Used to underline "Hint" diagnostics
 
     LspSignatureActiveParameter = { fg = c.orange },
+    LspCodeLens = { fg = c.comment },
 
     -- LspDiagnosticsFloatingError         = { }, -- Used to color "Error" diagnostic messages in diagnostics float
     -- LspDiagnosticsFloatingWarning       = { }, -- Used to color "Warning" diagnostic messages in diagnostics float
@@ -184,6 +185,9 @@ function M.setup(config)
     -- LspDiagnosticsSignWarning           = { }, -- Used for "Warning" signs in sign column
     -- LspDiagnosticsSignInformation       = { }, -- Used for "Information" signs in sign column
     -- LspDiagnosticsSignHint              = { }, -- Used for "Hint" signs in sign column
+
+    ALEErrorSign = { fg = c.error },
+    ALEWarningSign = { fg = c.warning },
   }
 
   theme.plugins = {
@@ -343,7 +347,7 @@ function M.setup(config)
     DiagnosticInformation = { fg = c.info },
     DiagnosticHint = { fg = c.hint },
 
-    LspFloatWinNormal = { bg = c.dark },
+    LspFloatWinNormal = { bg = c.bg_float },
     LspFloatWinBorder = { fg = c.border_highlight },
     LspSagaBorderTitle = { fg = c.cyan },
     LspSagaHoverBorder = { fg = c.blue },
@@ -369,16 +373,39 @@ function M.setup(config)
     BufferLineIndicatorSelected = { fg = c.git.change },
     BufferLineFill = { bg = c.black },
 
+    -- Barbar
+    BufferCurrent = { bg = c.fg_gutter, fg = c.fg },
+    BufferCurrentIndex = { bg = c.fg_gutter, fg = c.info },
+    BufferCurrentMod = { bg = c.fg_gutter, fg = c.warning },
+    BufferCurrentSign = { bg = c.fg_gutter, fg = c.info },
+    BufferCurrentTarget = { bg = c.fg_gutter, fg = c.red },
+    BufferVisible = { bg = c.bg_statusline, fg = c.fg },
+    BufferVisibleIndex = { bg = c.bg_statusline, fg = c.info },
+    BufferVisibleMod = { bg = c.bg_statusline, fg = c.warning },
+    BufferVisibleSign = { bg = c.bg_statusline, fg = c.info },
+    BufferVisibleTarget = { bg = c.bg_statusline, fg = c.red },
+    BufferInactive = { bg = c.bg_statusline, fg = c.dark5 },
+    BufferInactiveIndex = { bg = c.bg_statusline, fg = c.dark5 },
+    BufferInactiveMod = { bg = c.bg_statusline, fg = util.darken(c.warning, 0.7) },
+    BufferInactiveSign = { bg = c.bg_statusline, fg = c.border_highlight },
+    BufferInactiveTarget = { bg = c.bg_statusline, fg = c.red },
+    BufferTabpages = { bg = c.bg_statusline, fg = c.none },
+    BufferTabpage = { bg = c.bg_statusline, fg = c.border_highlight },
+
     -- Sneak
     Sneak = { fg = c.bg_highlight, bg = c.magenta },
     SneakScope = { bg = c.bg_visual },
 
     -- Hop
-    -- HopNextKey = { fg = c.teal },
-    -- HopNextKey1 = { fg = c.blue },
-    -- HopNextKey2 = { fg = util.lighten(c.blue, .3) },
+    HopNextKey = { fg = c.magenta2, style = "bold" },
+    HopNextKey1 = { fg = c.blue2, style = "bold" },
+    HopNextKey2 = { fg = util.darken(c.blue2, 0.3) },
     HopUnmatched = { fg = c.dark3 },
+
+    LightspeedGreyWash = { fg = c.dark3 },
   }
+
+  theme.defer = {}
 
   if config.hideInactiveStatusline then
     local inactive = { style = "underline", bg = c.bg, fg = c.bg, sp = c.border }
@@ -388,7 +415,7 @@ function M.setup(config)
 
     -- LuaLine
     for _, section in ipairs({ "a", "b", "c" }) do
-      theme.plugins["lualine_" .. section .. "_inactive"] = inactive
+      theme.defer["lualine_" .. section .. "_inactive"] = inactive
     end
   end
 

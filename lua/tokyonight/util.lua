@@ -238,6 +238,10 @@ function util.load(theme)
   util.syntax(theme.plugins)
   util.terminal(theme.colors)
   util.autocmds(theme.config)
+
+  vim.defer_fn(function()
+    util.syntax(theme.defer)
+  end, 100)
 end
 
 ---@param config Config
@@ -248,15 +252,24 @@ function util.color_overrides(colors, config)
       if not colors[key] then
         error("Color " .. key .. " does not exist")
       end
-      if string.sub(value, 1, 1) == "#" then
-        -- hex override
-        colors[key] = value
+
+      -- Patch: https://github.com/ful1e5/onedark.nvim/issues/6
+      if type(colors[key]) == "table" then
+        util.color_overrides(colors[key], { colors = value })
       else
-        -- another group
-        if not colors[value] then
-          error("Color " .. value .. " does not exist")
+        if value:lower() == "none" then
+          -- set to none
+          colors[key] = "NONE"
+        elseif string.sub(value, 1, 1) == "#" then
+          -- hex override
+          colors[key] = value
+        else
+          -- another group
+          if not colors[value] then
+            error("Color " .. value .. " does not exist")
+          end
+          colors[key] = colors[value]
         end
-        colors[key] = colors[value]
       end
     end
   end
