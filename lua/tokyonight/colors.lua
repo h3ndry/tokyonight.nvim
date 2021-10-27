@@ -13,10 +13,10 @@ function M.setup(config)
 
   colors = {
     none = "NONE",
-    bg_dark = "#080808",
+    bg_dark = "#121212",
     bg = "#0c0c0c",
     bg_highlight = "#292e42",
-    terminal_black = "#080808",
+    terminal_black = "#565f89",
     fg = "#c0caf5",
     fg_dark = "#a9b1d6",
     fg_gutter = "#3b4261",
@@ -74,7 +74,7 @@ function M.setup(config)
   colors.bg_statusline = colors.bg_dark
 
   -- Sidebar and Floats are configurable
-  colors.bg_sidebar = (config.transparentSidebar and colors.none) or config.darkSidebar and colors.bg_dark or colors.bg
+  colors.bg_sidebar = config.darkSidebar and colors.bg_dark or colors.bg
   colors.bg_float = config.darkFloat and colors.bg_dark or colors.bg
 
   colors.bg_visual = util.darken(colors.blue0, 0.7)
