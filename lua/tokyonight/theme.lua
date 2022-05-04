@@ -306,8 +306,8 @@ function M.setup(config)
     TelescopeBorder = { fg = c.border_highlight },
 
     -- NvimTree
-    NvimTreeNormal = { fg = c.fg_sidebar, bg = c.bg_sidebar },
-    NvimTreeNormalNC = { fg = c.fg_sidebar, bg = c.bg_sidebar },
+    NvimTreeNormal = { fg = c.fg_sidebar, bg = c.bg },
+    NvimTreeNormalNC = { fg = c.fg_sidebar, bg = c.bg },
     NvimTreeRootFolder = { fg = c.blue, style = "bold" },
     NvimTreeGitDirty = { fg = c.git.change },
     NvimTreeGitNew = { fg = c.git.add },
